@@ -41,6 +41,7 @@ class ProductPage(BasePage):
             *ProductPageLocators.PRODUCT_PRICE)
         alert_product_price = self.get_element_text(
             *ProductPageLocators.ALERT_CART_PRICE)
-        assert product_price_on_page == alert_product_price, "Wrong cart price!"        
+        assert product_price_on_page == alert_product_price, "Wrong cart price!" \
+            f"{product_price_on_page=}, {alert_product_price=}"       
     
     
