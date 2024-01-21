@@ -26,7 +26,8 @@ class ProductPage(BasePage):
             *ProductPageLocators.PRODUCT_NAME)
         alert_product_name = self.get_element_text(
             *ProductPageLocators.ALERT_PRODUCT_NAME)
-        assert product_name_on_page == alert_product_name, "Wrong product added to cart!"
+        assert product_name_on_page == alert_product_name, "Wrong product added to cart!" \
+            f"{product_name_on_page=}, {alert_product_name=}"
         
 
     def should_be_alert_with_product_price_after_adding_to_cart(self):
