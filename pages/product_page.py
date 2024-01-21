@@ -42,6 +42,16 @@ class ProductPage(BasePage):
         alert_product_price = self.get_element_text(
             *ProductPageLocators.ALERT_CART_PRICE)
         assert product_price_on_page == alert_product_price, "Wrong cart price!" \
-            f"{product_price_on_page=}, {alert_product_price=}"       
+            f"{product_price_on_page=}, {alert_product_price=}"
+            
+    
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+            
+    
+    def should_disappear_success_message(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message should disappear, but still there"
     
     

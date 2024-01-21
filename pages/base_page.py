@@ -1,12 +1,15 @@
 import math
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
+from selenium.common.exceptions import TimeoutException
 
 class BasePage():
     def __init__(self, browser, url, timeout=10):
         self.browser = browser
         self.url = url
-        self.browser.implicitly_wait(timeout)
+        # self.browser.implicitly_wait(timeout)
         
 
     def open(self):
@@ -17,6 +20,30 @@ class BasePage():
         try:
             self.browser.find_element(method, element)
         except (NoSuchElementException):
+            return False
+        return True
+    
+
+    def is_not_element_present(self, method, element, timeout=4):
+        """
+        Test will fail immidiately if element (appears) on page during timeout
+        """
+        try:
+            WebDriverWait(self.browser, timeout).until(
+                EC.presence_of_element_located((method, element)))
+        except TimeoutException:
+            return True
+        return False
+    
+
+    def is_disappeared(self, method, element, timeout=4):
+        """
+        Test will wait for element to disappear from page as long as timeout set
+        """
+        try:
+            WebDriverWait(self.browser, timeout, 1, TimeoutException).\
+                until_not(EC.presence_of_element_located((method, element)))
+        except TimeoutException:
             return False
         return True
     
