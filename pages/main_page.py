@@ -1,11 +1,16 @@
 from .base_page import BasePage
+# from .login_page import LoginPage
 from .locators import MainPageLocators
+
 
 class MainPage(BasePage):
     
     def go_to_login_page(self):
+        # Подход с неявным переходом, но явной инициализацией страницы
         login_link = self.browser.find_element(*MainPageLocators.LOGIN_LINK)
         login_link.click()
+        # Подход с явным переходом, но неявной инициализацией страницы (добавить)
+        # return LoginPage(browser=self.browser, url=self.browser.current_url)
         
     
     def should_be_login_link(self):
