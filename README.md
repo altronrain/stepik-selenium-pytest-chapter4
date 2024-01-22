@@ -5,4 +5,4 @@ https://stepik.org/course/575
 
 Environment:
     OS: Debian 12
-    Python version: 3.12.1
+    Python version: 3.11.2
